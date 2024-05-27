@@ -93,7 +93,7 @@ jobs:
           git config --global user.name "J. Doe"
       - name: Install musl-tools on Linux
         run: |
-          sudo apt-get update --yes && sudo apt-get install --yes musl-tools && sudo apt-get install libssl-dev
+          sudo apt-get update --yes && sudo apt-get install --yes musl-tools && sudo apt-get install libssl-dev && sudo apt-get install pkg-config
           dpkg -L libssl-dev | grep lib
           dpkg -L libssl-dev | grep include
           export OPENSSL_LIB_DIR=/usr/lib/x86_64-linux-gnu/
