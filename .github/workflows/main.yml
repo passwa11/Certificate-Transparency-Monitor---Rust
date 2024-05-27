@@ -92,8 +92,14 @@ jobs:
           git config --global user.email "jdoe@example.com"
           git config --global user.name "J. Doe"
       - name: Install musl-tools on Linux
-        run: sudo apt-get update --yes && sudo apt-get install --yes musl-tools
+        run: |
+          sudo apt-get update --yes && sudo apt-get install --yes musl-tools && sudo apt-get install libssl-dev
+          export OPENSSL_LIB_DIR=/usr/lib/x86_64-linux-gnu/
+          export OPENSSL_INCLUDE_DIR=/usr/include/openssl/
         if: contains(matrix.platform.name, 'musl')
+      - name: Install openssl on mac
+        run: brew install openssl
+        if: contains(matrix.platform.name, 'macOS')
       - name: Build binary
         uses: houseabsolute/actions-rust-cross@v0
         with:
