@@ -95,12 +95,12 @@ jobs:
         run: |
           sudo apt-get update -y
           sudo apt-get install -y musl-tools
-          sudo apt-get install libssl-dev -y
+          sudo apt-get install libssl-dev:armhf -y
           sudo apt-get install pkg-config -y
           # dpkg -L libssl-dev | grep lib
           # dpkg -L libssl-dev | grep include
-          export OPENSSL_LIB_DIR=/usr/lib/x86_64-linux-gnu/
-          export OPENSSL_INCLUDE_DIR=/usr/include/openssl/
+          # export OPENSSL_LIB_DIR=/usr/lib/x86_64-linux-gnu/
+          # export OPENSSL_INCLUDE_DIR=/usr/include/openssl/
         if: contains(matrix.platform.name, 'musl')
       - name: Install openssl on mac
         run: brew install openssl
