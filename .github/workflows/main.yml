@@ -98,11 +98,10 @@ jobs:
           dpkg -L libssl-dev | grep include
           export OPENSSL_LIB_DIR=/usr/lib/x86_64-linux-gnu/
           export OPENSSL_INCLUDE_DIR=/usr/include/openssl/
-          ENV
         if: contains(matrix.platform.name, 'musl')
       - name: Install openssl on mac
         run: brew install openssl
-        if: contains(matrix.platform.name, 'macOS')
+        if: contains(matrix.platform.name, 'apple')
       - name: Build binary
         uses: houseabsolute/actions-rust-cross@v0
         with:
