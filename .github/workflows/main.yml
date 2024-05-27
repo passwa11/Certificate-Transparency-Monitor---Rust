@@ -93,15 +93,18 @@ jobs:
           git config --global user.name "J. Doe"
       - name: Install musl-tools on Linux
         run: |
-          sudo apt-get update --yes && sudo apt-get install --yes musl-tools && sudo apt-get install libssl-dev && sudo apt-get install pkg-config
-          dpkg -L libssl-dev | grep lib
-          dpkg -L libssl-dev | grep include
+          sudo apt-get update -y
+          sudo apt-get install -y musl-tools
+          sudo apt-get install libssl-dev -y
+          sudo apt-get install pkg-config -y
+          # dpkg -L libssl-dev | grep lib
+          # dpkg -L libssl-dev | grep include
           export OPENSSL_LIB_DIR=/usr/lib/x86_64-linux-gnu/
           export OPENSSL_INCLUDE_DIR=/usr/include/openssl/
         if: contains(matrix.platform.name, 'musl')
       - name: Install openssl on mac
         run: brew install openssl
-        if: contains(matrix.platform.name, 'apple')
+        if: contains(matrix.platform.name, 'darwin')
       - name: Build binary
         uses: houseabsolute/actions-rust-cross@v0
         with:
